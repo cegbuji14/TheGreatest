@@ -5,6 +5,11 @@ export function findBestMatch(userAttr, players) {
     console.error("No players passed to matcher");
     return null;
   }
+  if (userAttr.length !== players[0].attributes.length) {
+    console.error("User attribute vector length does not match player attribute length");
+    return null;
+  }
+  
 
   let bestPlayer = null;
   let bestScore = Infinity;
@@ -12,7 +17,7 @@ export function findBestMatch(userAttr, players) {
   for (const p of players) {
     const d = distance(userAttr, p.attributes);
 
-    console.log("Checking:", p.name, "distance:", d);
+    console.log("Checking:", p.name, "distance:", d);//remove eventually
 
     if (!Number.isNaN(d) && d < bestScore) {
       bestScore = d;
