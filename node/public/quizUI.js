@@ -105,12 +105,12 @@ function showResults(matches, archetype) {
     .join("");
 
   resultsDiv.innerHTML = `
-    <h1>Your Match</h1>
+    <h1>Your GOAT:</h1>
     <h2>${mainMatch.name}</h2>
 
-    <p><strong>Archetype:</strong> ${archetypeText}</p>
+    <p><strong>Preferred Archetype:</strong> ${archetypeText}</p>
 
-    <h3>Also Similar To</h3>
+    <h3>Players who also fit you:</h3>
     <ul>
       ${others}
     </ul>
