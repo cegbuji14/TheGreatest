@@ -84,27 +84,16 @@ async function submitQuiz() {
   }
   
   showResults(data.player, data.archetype);
-  /*console.log("Matched player:", data);//test
-  //handle/display results here
-  if (data.player) {
-    quizDiv.innerHTML = `
-      <h2>Your Match</h2>
-      <h1>${data.player.name}</h1>
-    `;
-  } else {
-    quizDiv.innerHTML = "<h2>No match found.</h2>";
-  }
-  */
+
 }
 function showResults(player, archetype) {
   const resultsDiv = document.getElementById("results");
+  const archetypeText = formatArchetype(archetype);
+
 
   quizDiv.style.display = "none";
   resultsDiv.style.display = "block";
 
-  const archetypeText = Object.entries(archetype)
-    .map(([key, value]) => `${key} (${value})`)
-    .join(", ");
 
   resultsDiv.innerHTML = `
     <h1>Your Match</h1>
@@ -126,8 +115,30 @@ function resetQuiz() {
   quizDiv.style.display = "block";
   nextBtn.style.display = "inline-block";
   nextBtn.textContent = "Next";
+  nextBtn.disabled = true;
 
   renderQuestion();
 }
+
+function formatArchetype(archetype) {
+  if (!archetype || Object.keys(archetype).length === 0) {
+    return "Balanced";
+  }
+
+  return Object.entries(archetype)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 2)
+    .map(([key]) => {
+      switch (key) {
+        case "teamFirst": return "Team-First";
+        case "heliocentric": return "Heliocentric";
+        case "systemPlayer": return "System Player";
+        case "context": return "Context-Aware";
+        default: return key;
+      }
+    })
+    .join(" • ");
+}
+
 
 loadQuestions();
