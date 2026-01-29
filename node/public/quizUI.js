@@ -4,7 +4,11 @@ let answers = [];
 
 const quizDiv = document.getElementById("quiz");
 const nextBtn = document.getElementById("nextBtn");
+const backBtn = document.getElementById("backBtn");
+const questionCounter = document.getElementById("questionCounter");
+
 nextBtn.disabled = true;
+backBtn.disabled = true;
 
 async function loadQuestions() {
   try {
@@ -20,11 +24,14 @@ async function loadQuestions() {
 function renderQuestion() {
   nextBtn.disabled = true;
 
-  if (currentIndex === questions.length - 1) {
-    nextBtn.textContent = "Finish";
-  } else {
-    nextBtn.textContent = "Next";
-  }
+  // Update question counter text
+  questionCounter.textContent = `Question ${currentIndex + 1} / ${questions.length}`;
+
+  // Update next button text
+  nextBtn.textContent = currentIndex === questions.length - 1 ? "Finish" : "Next";
+
+  // Enable/disable back button
+  backBtn.disabled = currentIndex === 0;
 
   const q = questions[currentIndex];
   quizDiv.innerHTML = `<h3>${q.text}</h3>`;
@@ -36,12 +43,20 @@ function renderQuestion() {
     btn.onclick = () => {
       answers[currentIndex] = key;
 
+      // Reset all buttons background
       Array.from(quizDiv.querySelectorAll("button")).forEach(b => {
         b.style.backgroundColor = "";
       });
+
       btn.style.backgroundColor = "#d3d3d3";
-      nextBtn.disabled = false; // ✅ enables Next button
+      nextBtn.disabled = false; // Enable Next button
     };
+
+    // If already answered, highlight selected
+    if (answers[currentIndex] === key) {
+      btn.style.backgroundColor = "#d3d3d3";
+      nextBtn.disabled = false;
+    }
 
     quizDiv.appendChild(btn);
   });
@@ -60,16 +75,20 @@ nextBtn.onclick = () => {
 
   currentIndex++;
   renderQuestion();
+};
 
-  if (currentIndex === questions.length - 1) {
-    nextBtn.textContent = "Finish";
-  }
+backBtn.onclick = () => {
+  if (currentIndex === 0) return;
+  currentIndex--;
+  renderQuestion();
 };
 
 async function submitQuiz() {
-
   quizDiv.innerHTML = "<h2>Finding your match...</h2>";
   nextBtn.style.display = "none";
+  backBtn.style.display = "none";
+  questionCounter.style.display = "none";
+
   const res = await fetch("/quiz/submit-quiz", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -82,10 +101,8 @@ async function submitQuiz() {
     quizDiv.innerHTML = "<p>Something went wrong.</p>";
     return;
   }
-  
+
   showResults(data.topMatches, data.archetype);
-
-
 }
 
 function showResults(matches, archetype) {
@@ -93,44 +110,44 @@ function showResults(matches, archetype) {
   const archetypeText = formatArchetype(archetype);
 
   quizDiv.style.display = "none";
+  document.getElementById("quiz-container").style.display = "none";
   resultsDiv.style.display = "block";
 
   const mainMatch = matches[0];
-
   const others = matches
     .slice(1)
-    .map(
-      p => `<li>${p.name}</li>`
-    )
+    .map(p => `<li>${p.name}</li>`)
     .join("");
 
   resultsDiv.innerHTML = `
-    <h1>Your GOAT:</h1>
+    <h1>Your GOAT...</h1>
     <h2>${mainMatch.name}</h2>
-
     <p><strong>Preferred Archetype:</strong> ${archetypeText}</p>
-
-    <h3>Players who also fit you:</h3>
-    <ul>
-      ${others}
-    </ul>
-
+    <h3>Other players who match you:</h3>
+    <ul>${others}</ul>
     <button id="retakeBtn">Retake Quiz</button>
   `;
 
   document.getElementById("retakeBtn").onclick = resetQuiz;
 }
 
-
 function resetQuiz() {
   currentIndex = 0;
   answers = [];
 
-  document.getElementById("results").style.display = "none";
+  const resultsDiv = document.getElementById("results");
+  resultsDiv.style.display = "none";
+
+  // Reset UI elements
   quizDiv.style.display = "block";
+  document.getElementById("quiz-container").style.display = "block";
   nextBtn.style.display = "inline-block";
+  backBtn.style.display = "inline-block";
+  questionCounter.style.display = "block";
+
   nextBtn.textContent = "Next";
   nextBtn.disabled = true;
+  backBtn.disabled = true;
 
   renderQuestion();
 }
@@ -148,12 +165,12 @@ function formatArchetype(archetype) {
         case "teamFirst": return "Team-First";
         case "heliocentric": return "Heliocentric";
         case "systemPlayer": return "System Player";
+        case "oneOnOneStyle": return "Iso Player";
         case "context": return "Context-Aware";
         default: return key;
       }
     })
     .join(" • ");
 }
-
 
 loadQuestions();

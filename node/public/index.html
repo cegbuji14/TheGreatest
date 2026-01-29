@@ -1,14 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <title>Basketball Matcher</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <h1>Basketball Philosophy Quiz</h1>
-  <div id="quiz"></div>
-  <button id="nextBtn">Next</button>
-  <div id="results" style="display: none;"></div>
+  <div id="quiz-container">
+    <h1>Basketball Philosophy Quiz</h1>
+    
+    <div id="questionCounter"></div>  <!-- Question counter--> 
+
+    <div id="quiz"></div>              <!-- Questions & answers -->
+
+    <div id="buttonsContainer" style="margin-top: 1rem; text-align: center;">
+      <button id="backBtn" disabled>Back</button>
+      <button id="nextBtn" disabled>Next</button>
+    </div>
+  </div>
+
+  <div id="results" style="display:none;"></div>
 
   <script src="quizUI.js"></script>
 </body>
