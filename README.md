@@ -5,10 +5,10 @@ This project matches users to basketball players based on their preferences and 
 ## Screenshots
 
 ### Quiz Interface
-![Quiz ] (screenshots/quiz.png)
+![Quiz](screenshots/quiz.png)
 
 ### Resuls
-![Quiz Results] (screenshots/quizresults.png)
+![Quiz Results](screenshots/quizresults.png)
 
 ## Tech Stack
 
