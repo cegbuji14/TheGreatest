@@ -2,6 +2,14 @@
 
 This project matches users to basketball players based on their preferences and player attributes.
 
+## Screenshots
+
+### Quiz Interface
+![Quiz ] (screenshots/quiz.png)
+
+### Resuls
+![Quiz Results] (screenshots/quizresults.png)
+
 ## Tech Stack
 
 - C++ for the initial implementation
