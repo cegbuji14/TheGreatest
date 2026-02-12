@@ -122,6 +122,7 @@ function showResults(matches, archetype) {
   resultsDiv.innerHTML = `
     <h1>Your GOAT...</h1>
     <h2>${mainMatch.name}</h2>
+    <img src="${mainMatch.image}" alt="${mainMatch.name}" class="player-img" />    
     <p><strong>Preferred Archetype:</strong> ${archetypeText}</p>
     <h3>Other players who match you:</h3>
     <ul>${others}</ul>

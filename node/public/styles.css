@@ -67,6 +67,16 @@ body, html {
     box-sizing: border-box;
     text-align: center;
   }
+
+  .player-img {
+    width: 220px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin: 1rem 0;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  }
+  
   
   /* Responsive */
   @media (max-width: 640px) {
