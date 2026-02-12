@@ -1,19 +1,34 @@
-body, html {
+  html, body {
     height: 100%;
     margin: 0;
     font-family: Arial, sans-serif;
-    background: #f8f8f8;
-  
+    box-sizing: border-box;
+  }
+
+  body {
+    background-image: url("images/hof.jpg"); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     padding: 1rem;
-    box-sizing: border-box;
   }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4); /* adjust darkness */
+   z-index: -1;
+  }
+
   
   #quiz-container {
-    background: white;
+    background: rgba(255, 255, 255, 0.95);
     padding: 2rem;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
@@ -56,6 +71,10 @@ body, html {
     background-color: #0056b3;
   }
   
+  button.selected {
+    background-color: #ff6b00; /* basketball orange */
+  }
+
   #results {
     background: white;
     padding: 2rem;

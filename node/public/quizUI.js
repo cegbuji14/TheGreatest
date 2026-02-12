@@ -45,10 +45,10 @@ function renderQuestion() {
 
       // Reset all buttons background
       Array.from(quizDiv.querySelectorAll("button")).forEach(b => {
-        b.style.backgroundColor = "";
-      });
+        b.classList.remove("selected");
+      });      
 
-      btn.style.backgroundColor = "#d3d3d3";
+      btn.classList.add("selected");
       nextBtn.disabled = false; // Enables next button
     };
 
