@@ -20,11 +20,16 @@ This project matches users to basketball players based on their preferences and 
 - Kubernetes
 
 ## Build and Run (Node.js)
-/node
+Run 
 
-Run
+git clone https://github.com/cegbuji14/TheGreatest.git
+
+cd TheGreatest
+
+cd node
 
 npm install
+
 npm start
  
 Open browser and go to
@@ -63,7 +68,6 @@ Run
 
 colima start --kubernetes
 
-
 To deploy backend:
 kubectl apply -f k8s/deployment.yaml
 
@@ -75,7 +79,11 @@ http://localhost:30080
 
 
 ## Build and Run (C++)
-/cpp-version
+Run
+
+git clone https://github.com/cegbuji14/TheGreatest.git
+
+cd TheGreatest/cpp-version/
 
 Compile all source files with:
 
