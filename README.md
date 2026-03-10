@@ -1,6 +1,6 @@
 # GOAT
 
-This project matches users to basketball players based on their preferences and player attributes.
+GOAT is a full-stack web application that matches users with professional basketball players whose playstyles best match their preferences. The application collects user responses through an interactive quiz and compares them with player attribute profiles to determine the closest match.
 
 ## Screenshots
 
