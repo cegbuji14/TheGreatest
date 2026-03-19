@@ -36,7 +36,7 @@ Open browser and go to
 http://localhost:3000
 
 
-## Running the Basketball Matcher Backend with Docker
+## Running GOAT with Docker
 
 ### Prerequisites
 - [Docker CLI](https://docs.docker.com/get-docker/) installed and running  
